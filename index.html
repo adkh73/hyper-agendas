@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendas Personalizadas - Tu Marca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #3a5a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e55a5a;
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+            }
+        }
+        
+        /* Banner de Descuento Animado */
+        .discount-banner {
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e, #ff6b6b);
+            background-size: 200% 100%;
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            animation: gradientShift 3s ease infinite, slideIn 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .discount-text {
+            display: inline-block;
+            animation: textSlide 15s linear infinite;
+        }
+        
+        @keyframes textSlide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #6a8fc5);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center bottom;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .hero .btn {
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Flash Sale Section */
+        .flash-sale {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+            animation: flashPulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes flashPulse {
+            0% { box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(220, 53, 69, 0.5); }
+            100% { box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3); }
+        }
+        
+        .flash-sale::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .flash-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .flash-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        /* Sección de Muestras */
+        .samples {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .sample-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .sample-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .sample-image {
+            height: 200px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sample-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .sample-card:hover .sample-image img {
+            transform: scale(1.05);
+        }
+        
+        .sample-info {
+            padding: 20px;
+        }
+        
+        .sample-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .sample-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .original-price {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .discount-percent {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary-color), #ff8e8e);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center bottom;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal de Compra */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 1000px;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .admin-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            flex-shrink: 0;
+        }
+        
+        .admin-tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .admin-content {
+            display: none;
+        }
+        
+        .admin-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .edit-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pendiente {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-procesando {
+            background-color: #cce7ff;
+            color: #004085;
+        }
+        
+        .status-enviado {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-completado {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: white;
+        }
+        
+        .payment-status {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .payment-pendiente {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .payment-pagado {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .payment-fallido {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-right-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        /* File Upload Styles */
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload-label:hover {
+            background: #e9ecef;
+            border-color: #4a6fa5;
+        }
+        
+        .file-upload-label.has-file {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .current-image {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .image-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .navbar {
+                position: relative;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .flash-title {
+                font-size: 1.8rem;
+            }
+            
+            .flash-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .admin-tabs {
+                overflow-x: auto;
+            }
+            
+            .table {
+                font-size: 0.9rem;
+            }
+            
+            .table th, .table td {
+                padding: 8px 10px;
+            }
+            
+            .product-card, .sample-card, .feature-card, .testimonial-card {
+                margin: 0 10px;
+            }
+            
+            .samples-grid, .products-grid, .features-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .admin-panel {
+                padding: 20px 15px;
+                margin: 20px auto;
+            }
+            
+            /* Mejoras para el panel admin en móviles */
+            .admin-panel {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .table-container {
+                border: none;
+                border-radius: 0;
+            }
+            
+            .table th, .table td {
+                padding: 8px 5px;
+                font-size: 0.8rem;
+            }
+            
+            .action-btn {
+                padding: 3px 6px;
+                font-size: 0.7rem;
+                margin-right: 2px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .flash-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            /* Mejoras adicionales para móviles muy pequeños */
+            .admin-tab {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .table th, .table td {
+                padding: 6px 4px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner de Descuento Animado -->
+    <div class="discount-banner" id="discountBanner" style="display: none;">
+        <div class="discount-text" id="discountText"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">TuMarca</div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#muestras">Muestras</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <a href="#" class="btn" id="adminToggle">Panel Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="heroTitle">Agendas Personalizadas de Alta Calidad</h1>
+                <p id="heroDescription">Diseña tu agenda perfecta con nuestros materiales premium y personalización exclusiva. Ideal para empresas, eventos y uso personal.</p>
+                <a href="#productos" class="btn btn-secondary btn-pulse">Ver Productos en Oferta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Muestras -->
+    <section class="samples" id="muestras">
+        <div class="container">
+            <h2 class="section-title">Algunas Muestras</h2>
+            <div class="samples-grid" id="samplesContainer">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flash Sale Section -->
+    <section class="flash-sale" id="flashSale" style="display: none;">
+        <div class="container">
+            <h2 class="flash-title">OFERTA FLASH SOLO POR HOY</h2>
+            <p class="flash-subtitle" id="flashDiscountText"></p>
+            
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+            
+            <a href="#productos" class="btn btn-pulse">COMPRAR AHORA</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="productos">
+        <div class="container">
+            <h2 class="section-title">Nuestras Agendas</h2>
+            <div class="products-grid" id="productsContainer">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="caracteristicas">
+        <div class="container">
+            <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="feature-title">Calidad Premium</h3>
+                    <p>Materiales de primera calidad que garantizan durabilidad y elegancia.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="feature-title">Personalización Total</h3>
+                    <p>Diseña cada detalle de tu agenda según tus necesidades y preferencias.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <h3 class="feature-title">Envío Rápido</h3>
+                    <p>Recibe tu pedido en tiempo récord sin importar dónde te encuentres.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>La agenda ejecutiva que compré superó todas mis expectativas. La calidad del cuero es excepcional y la personalización fue exactamente como la había imaginado.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MG</div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Directora de Marketing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Pedí agendas personalizadas para mi equipo de trabajo y quedaron fascinados. El proceso fue sencillo y el resultado profesional. ¡Volveré a ordenar!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CR</div>
+                        <div class="author-info">
+                            <h4>Carlos Rodríguez</h4>
+                            <p>Gerente General</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Como estudiante, necesitaba una agenda funcional pero con estilo. Encontré exactamente lo que buscaba y a un precio increíble. ¡La recomiendo totalmente!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Ana López</h4>
+                            <p>Estudiante Universitaria</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contacto">
+        <div class="container">
+            <div class="cta-content">
+                <h2 id="ctaTitle">¿Listo para crear tu agenda perfecta?</h2>
+                <p id="ctaDescription">Contáctanos hoy mismo y recibe asesoramiento personalizado para diseñar la agenda que se adapte a tus necesidades.</p>
+                <a href="#" class="btn btn-pulse">Solicitar Cotización</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TuMarca</h3>
+                    <p>Especialistas en agendas personalizadas de alta calidad para empresas y particulares.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#muestras">Muestras</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li>Email: info@tumarca.com</li>
+                        <li>Teléfono: +1 234 567 890</li>
+                        <li>Dirección: Calle Falsa 123, Ciudad</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 TuMarca. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Compra -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Finalizar Compra</h2>
+            
+            <div class="order-summary" id="orderSummary">
+                <!-- Resumen del pedido se cargará aquí -->
+            </div>
+            
+            <form id="customerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerName">Nombre Completo *</label>
+                        <input type="text" id="customerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">Email *</label>
+                        <input type="email" id="customerEmail" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerPhone">Teléfono</label>
+                        <input type="tel" id="customerPhone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddress">Dirección</label>
+                        <input type="text" id="customerAddress" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerNotes">Notas adicionales</label>
+                    <textarea id="customerNotes" class="form-control" rows="3" placeholder="Especificaciones especiales para tu agenda..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-secondary" id="submitOrder">
+                    Proceder al Pago
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="container">
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2>Panel de Administración</h2>
+                <button class="btn" id="closeAdmin">Cerrar Panel</button>
+            </div>
+            
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="products">Productos</div>
+                <div class="admin-tab" data-tab="samples">Muestras</div>
+                <div class="admin-tab" data-tab="promotions">Promociones</div>
+                <div class="admin-tab" data-tab="orders">Pedidos</div>
+                <div class="admin-tab" data-tab="content">Contenido</div>
+            </div>
+            
+            <!-- Products Management -->
+            <div class="admin-content active" id="products-content">
+                <h3>Gestión de Productos</h3>
+                <button class="btn" id="addProductBtn">Agregar Producto</button>
+                
+                <div class="product-form" id="productForm" style="display: none; margin-top: 20px;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Nombre del Producto *</label>
+                            <input type="text" id="productName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Precio *</label>
+                            <input type="number" id="productPrice" class="form-control" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Descripción *</label>
+                        <textarea id="productDescription" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productStock">Stock</label>
+                            <input type="number" id="productStock" class="form-control" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="productFeatured"> Producto Destacado
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen del Producto</label>
+                        <div class="file-upload">
+                            <input type="file" id="productImage" class="file-upload-input" accept="image/*">
+                            <label for="productImage" class="file-upload-label" id="productImageLabel">
+                                <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+                            </label>
+                        </div>
+                        <img id="productImagePreview" class="image-preview" alt="Vista previa">
+                        <div id="currentProductImage" class="image-info" style="display: none;">
+                            <img class="current-image" alt="Imagen actual">
+                            <span>Imagen actual</span>
+                        </div>
+                    </div>
+                    <button class="btn" id="saveProduct">Guardar Producto</button>
+                    <button class="btn btn-secondary" id="cancelProduct">Cancelar</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Destacado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTable">
+                            <!-- Los productos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Samples Management -->
+            <div class="admin-content" id="samples-content">
+                <h3>Gestión de Muestras</h3>
+                <button class="btn" id="addSampleBtn">Agregar Muestra</button>
+                
+                <div class="sample-form" id="sampleForm" style="display: none; margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="sampleProduct">Producto *</label>
+                        <select id="sampleProduct" class="form-control" required>
+                            <!-- Se cargarán los productos -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sampleTitle">Título *</label>
+                        <input type="text" id="sampleTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sampleDescription">Descripción</label>
+                        <textarea id="sampleDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sampleOrder">Orden de Visualización</label>
+                        <input type="number" id="sampleOrder" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen de la Muestra *</label>
+                        <div class="file-upload">
+                            <input type="file" id="sampleImage" class="file-upload-input" accept="image/*" required>
+                            <label for="sampleImage" class="file-upload-label" id="sampleImageLabel">
+                                <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+                            </label>
+                        </div>
+                        <img id="sampleImagePreview" class="image-preview" alt="Vista previa">
+                        <div id="currentSampleImage" class="image-info" style="display: none;">
+                            <img class="current-image" alt="Imagen actual">
+                            <span>Imagen actual</span>
+                        </div>
+                    </div>
+                    <button class="btn" id="saveSample">Guardar Muestra</button>
+                    <button class="btn btn-secondary" id="cancelSample">Cancelar</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Título</th>
+                                <th>Producto</th>
+                                <th>Orden</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="samplesTable">
+                            <!-- Las muestras se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Promotions Management -->
+            <div class="admin-content" id="promotions-content">
+                <h3>Gestión de Promociones</h3>
+                <button class="btn" id="addPromotionBtn">Agregar Promoción</button>
+                
+                <div class="promotion-form" id="promotionForm" style="display: none; margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="promotionName">Nombre de la Promoción</label>
+                        <input type="text" id="promotionName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionDiscount">Descuento (%)</label>
+                        <input type="number" id="promotionDiscount" class="form-control" min="0" max="100" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionCode">Código</label>
+                        <input type="text" id="promotionCode" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionExpiry">Fecha de Expiración</label>
+                        <input type="datetime-local" id="promotionExpiry" class="form-control">
+                    </div>
+                    <button class="btn" id="savePromotion">Guardar Promoción</button>
+                    <button class="btn btn-secondary" id="cancelPromotion">Cancelar</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descuento</th>
+                                <th>Código</th>
+                                <th>Expiración</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="promotionsTable">
+                            <!-- Las promociones se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Orders Management -->
+            <div class="admin-content" id="orders-content">
+                <h3>Gestión de Pedidos</h3>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Productos</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Pago</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable">
+                            <!-- Los pedidos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Content Management -->
+            <div class="admin-content" id="content-content">
+                <h3>Gestión de Contenido</h3>
+                <div class="form-group">
+                    <label for="adminHeroTitle">Título Principal</label>
+                    <input type="text" id="adminHeroTitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="adminHeroDescription">Descripción Principal</label>
+                    <textarea id="adminHeroDescription" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ctaText">Texto CTA</label>
+                    <input type="text" id="ctaText" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ctaDescription">Descripción CTA</label>
+                    <textarea id="ctaDescription" class="form-control" rows="3"></textarea>
+                </div>
+                <button class="btn" id="saveContent">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // URL base de la API
+        const API_BASE = 'api.php';
+        
+        // Variables globales
+        let currentProduct = null;
+        let editingProductId = null;
+        let editingSampleId = null;
+        let activePromotion = null;
+        let countdownInterval;
+
+        // Elementos del DOM
+        const adminPanel = document.getElementById('adminPanel');
+        const adminToggle = document.getElementById('adminToggle');
+        const closeAdmin = document.getElementById('closeAdmin');
+        const adminTabs = document.querySelectorAll('.admin-tab');
+        const adminContents = document.querySelectorAll('.admin-content');
+        const productsContainer = document.getElementById('productsContainer');
+        const productsTable = document.getElementById('productsTable');
+        const promotionsTable = document.getElementById('promotionsTable');
+        const ordersTable = document.getElementById('ordersTable');
+        const discountBanner = document.getElementById('discountBanner');
+        const discountText = document.getElementById('discountText');
+        const flashSale = document.getElementById('flashSale');
+        const flashDiscountText = document.getElementById('flashDiscountText');
+        const countdownHours = document.getElementById('countdown-hours');
+        const countdownMinutes = document.getElementById('countdown-minutes');
+        const countdownSeconds = document.getElementById('countdown-seconds');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModal = document.getElementById('closeModal');
+        const orderSummary = document.getElementById('orderSummary');
+        const customerForm = document.getElementById('customerForm');
+        const submitOrder = document.getElementById('submitOrder');
+        const samplesContainer = document.getElementById('samplesContainer');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        // Menú móvil
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Funciones para subida de archivos
+        function setupFileUpload(inputId, labelId, previewId, currentImageId = null) {
+            const input = document.getElementById(inputId);
+            const label = document.getElementById(labelId);
+            const preview = document.getElementById(previewId);
+            const currentImage = currentImageId ? document.getElementById(currentImageId) : null;
+
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    label.textContent = file.name;
+                    label.classList.add('has-file');
+                    
+                    // Mostrar vista previa
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                    
+                    // Ocultar imagen actual si estamos editando
+                    if (currentImage) {
+                        currentImage.style.display = 'none';
+                    }
+                } else {
+                    label.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen';
+                    label.classList.remove('has-file');
+                    preview.style.display = 'none';
+                    
+                    // Mostrar imagen actual si estamos editando
+                    if (currentImage) {
+                        currentImage.style.display = 'flex';
+                    }
+                }
+            });
+        }
+
+        // Funciones para interactuar con la API
+        async function fetchData(endpoint) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`);
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return null;
+            }
+        }
+
+        async function postData(endpoint, data) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error posting data:', error);
+                return null;
+            }
+        }
+
+        async function postFormData(endpoint, formData) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error posting form data:', error);
+                return null;
+            }
+        }
+
+        async function putData(endpoint, data) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error updating data:', error);
+                return null;
+            }
+        }
+
+        async function putFormData(endpoint, formData) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error updating form data:', error);
+                return null;
+            }
+        }
+
+        async function deleteData(endpoint) {
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return await response.json();
+            } catch (error) {
+                console.error('Error deleting data:', error);
+                return null;
+            }
+        }
+
+        // Verificar promociones activas
+        async function checkActivePromotions() {
+            const promotions = await fetchData('promotions');
+            if (!promotions || promotions.length === 0) return null;
+            
+            // Buscar promociones activas (que no hayan expirado)
+            const now = new Date();
+            const activePromotions = promotions.filter(promo => {
+                const expiryDate = new Date(promo.expiry_date);
+                return expiryDate > now;
+            });
+            
+            // Ordenar por fecha de expiración (más cercana primero)
+            activePromotions.sort((a, b) => new Date(a.expiry_date) - new Date(b.expiry_date));
+            
+            return activePromotions.length > 0 ? activePromotions[0] : null;
+        }
+
+        // Mostrar banner de descuento
+        async function showDiscountBanner() {
+            activePromotion = await checkActivePromotions();
+            
+            if (activePromotion) {
+                discountText.textContent = `🔥 ${activePromotion.discount}% DE DESCUENTO EN TODAS NUESTRAS AGENDAS - SOLO POR TIEMPO LIMITADO - USA EL CÓDIGO: ${activePromotion.code} 🔥`;
+                discountBanner.style.display = 'block';
+                
+                // Configurar la oferta flash
+                showFlashSale(activePromotion);
+            } else {
+                discountBanner.style.display = 'none';
+                flashSale.style.display = 'none';
+            }
+        }
+
+        // Mostrar oferta flash
+        function showFlashSale(promotion) {
+            flashDiscountText.textContent = `¡APROVECHA ${promotion.discount}% DE DESCUENTO EN TODAS NUESTRAS AGENDAS!`;
+            flashSale.style.display = 'block';
+            
+            // Configurar el contador regresivo
+            startCountdown(promotion.expiry_date);
+        }
+
+        // Iniciar contador regresivo
+        function startCountdown(expiryDate) {
+            clearInterval(countdownInterval);
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const expiry = new Date(expiryDate).getTime();
+                const timeLeft = expiry - now;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    flashSale.style.display = 'none';
+                    discountBanner.style.display = 'none';
+                    return;
+                }
+                
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                countdownHours.textContent = hours.toString().padStart(2, '0');
+                countdownMinutes.textContent = minutes.toString().padStart(2, '0');
+                countdownSeconds.textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // Cargar muestras
+        async function loadSamples() {
+            const samples = await fetchData('samples');
+            if (!samples) {
+                samplesContainer.innerHTML = '<p>Error al cargar las muestras</p>';
+                return;
+            }
+            
+            samplesContainer.innerHTML = '';
+            samples.forEach(sample => {
+                const sampleCard = document.createElement('div');
+                sampleCard.className = 'sample-card';
+                sampleCard.innerHTML = `
+                    <div class="sample-image">
+                        ${sample.image_url ? `<img src="${sample.image_url}" alt="${sample.title}">` : '<i class="fas fa-image" style="font-size: 50px; color: #ccc;"></i>'}
+                    </div>
+                    <div class="sample-info">
+                        <h3 class="sample-title">${sample.title}</h3>
+                        <p class="sample-description">${sample.description}</p>
+                    </div>
+                `;
+                samplesContainer.appendChild(sampleCard);
+            });
+        }
+
+        // Cargar productos en la landing page
+        async function loadProducts() {
+            const products = await fetchData('products');
+            
+            if (!products) {
+                productsContainer.innerHTML = '<p>Error al cargar los productos</p>';
+                return;
+            }
+            
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const originalPrice = parseFloat(product.price);
+                let discountedPrice = originalPrice;
+                let discountPercent = 0;
+                
+                if (activePromotion) {
+                    discountPercent = parseFloat(activePromotion.discount);
+                    discountedPrice = originalPrice * (1 - discountPercent / 100);
+                }
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                productCard.innerHTML = `
+                    ${activePromotion ? '<span class="product-badge">OFERTA</span>' : ''}
+                    <div class="product-image">
+                        ${product.image_url ? `<img src="${product.image_url}" alt="${product.name}">` : '<i class="fas fa-image" style="font-size: 50px; color: #ccc;"></i>'}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <span class="current-price">$${discountedPrice.toFixed(2)}</span>
+                            ${activePromotion ? `
+                                <span class="original-price">$${originalPrice.toFixed(2)}</span>
+                                <span class="discount-percent">-${discountPercent}%</span>
+                            ` : ''}
+                        </div>
+                        <button class="btn buy-btn" data-product='${JSON.stringify(product).replace(/'/g, "&#39;")}'>Comprar Ahora</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+            
+            // Agregar event listeners a los botones de compra
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const productData = JSON.parse(e.target.getAttribute('data-product').replace(/&#39;/g, "'"));
+                    openPurchaseModal(productData);
+                });
+            });
+        }
+
+        // Funciones para el proceso de compra
+        function openPurchaseModal(product) {
+            currentProduct = product;
+            let finalPrice = parseFloat(product.price);
+            let discountAmount = 0;
+            
+            if (activePromotion) {
+                discountAmount = finalPrice * (parseFloat(activePromotion.discount) / 100);
+                finalPrice = finalPrice - discountAmount;
+            }
+            
+            orderSummary.innerHTML = `
+                <h3>Resumen de tu Pedido</h3>
+                <div class="summary-item">
+                    <span>${product.name}</span>
+                    <span>$${parseFloat(product.price).toFixed(2)}</span>
+                </div>
+                ${activePromotion ? `
+                    <div class="summary-item">
+                        <span>Descuento (${activePromotion.discount}%)</span>
+                        <span>-$${discountAmount.toFixed(2)}</span>
+                    </div>
+                ` : ''}
+                <div class="summary-item">
+                    <span>Envío</span>
+                    <span>Gratis</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total</span>
+                    <span>$${finalPrice.toFixed(2)}</span>
+                </div>
+            `;
+            
+            purchaseModal.style.display = 'block';
+        }
+
+        function closePurchaseModal() {
+            purchaseModal.style.display = 'none';
+            currentProduct = null;
+            customerForm.reset();
+        }
+
+        // Procesar el pedido
+        customerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const customerName = document.getElementById('customerName').value;
+            const customerEmail = document.getElementById('customerEmail').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const customerAddress = document.getElementById('customerAddress').value;
+            const customerNotes = document.getElementById('customerNotes').value;
+            
+            if (!customerName || !customerEmail) {
+                alert('Por favor, complete los campos obligatorios (Nombre y Email)');
+                return;
+            }
+            
+            // Calcular total con descuento
+            let totalAmount = parseFloat(currentProduct.price);
+            
+            if (activePromotion) {
+                const discount = totalAmount * (parseFloat(activePromotion.discount) / 100);
+                totalAmount = totalAmount - discount;
+            }
+            
+            // Mostrar estado de carga
+            submitOrder.classList.add('btn-loading');
+            submitOrder.disabled = true;
+            
+            try {
+                // Crear el pedido
+                const orderData = {
+                    customer_name: customerName,
+                    customer_email: customerEmail,
+                    customer_phone: customerPhone,
+                    total_amount: totalAmount,
+                    customer_notes: customerNotes,
+                    items: [{
+                        product_id: currentProduct.id,
+                        quantity: 1,
+                        unit_price: totalAmount
+                    }]
+                };
+                
+                const result = await postData('orders', orderData);
+                
+                if (result && result.id) {
+                    alert('Pedido creado exitosamente. Serás redirigido a PayPal para completar el pago.');
+                    
+                    // Simular redirección a PayPal
+                    setTimeout(() => {
+                        alert('¡Pago completado! Tu pedido está siendo procesado.');
+                        closePurchaseModal();
+                        
+                        // Recargar la tabla de pedidos en el admin
+                        if (adminPanel.style.display === 'block') {
+                            loadOrdersTable();
+                        }
+                    }, 2000);
+                    
+                } else {
+                    throw new Error('Error al crear el pedido');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al procesar el pedido. Por favor, intente nuevamente.');
+            } finally {
+                submitOrder.classList.remove('btn-loading');
+                submitOrder.disabled = false;
+            }
+        });
+
+        // Cargar productos en la tabla del admin
+        async function loadProductsTable() {
+            const products = await fetchData('products');
+            if (!products) {
+                productsTable.innerHTML = '<tr><td colspan="7">Error al cargar los productos</td></tr>';
+                return;
+            }
+            
+            productsTable.innerHTML = '';
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>
+                        ${product.image_url ? 
+                            `<img src="${product.image_url}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">` : 
+                            '<span style="color: #999;">Sin imagen</span>'
+                        }
+                    </td>
+                    <td>${product.name}</td>
+                    <td>$${parseFloat(product.price).toFixed(2)}</td>
+                    <td>${product.stock || 0}</td>
+                    <td>${product.is_featured ? 'Sí' : 'No'}</td>
+                    <td>
+                        <button class="action-btn edit-btn" data-id="${product.id}">Editar</button>
+                        <button class="action-btn delete-btn" data-id="${product.id}">Eliminar</button>
+                    </td>
+                `;
+                productsTable.appendChild(row);
+            });
+            
+            // CORRECCIÓN: Añadir event listeners a los botones después de cargar la tabla
+            attachProductEventListeners();
+        }
+
+        // Función para adjuntar event listeners a los botones de productos - REPARADO
+        function attachProductEventListeners() {
+            // Añadir event listeners a los botones de editar
+            document.querySelectorAll('#productsTable .edit-btn').forEach(btn => {
+                btn.addEventListener('click', handleEditProduct);
+            });
+            
+            // Añadir event listeners a los botones de eliminar
+            document.querySelectorAll('#productsTable .delete-btn').forEach(btn => {
+                btn.addEventListener('click', handleDeleteProduct);
+            });
+        }
+
+        // Handlers específicos para productos
+        function handleEditProduct(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            editProduct(productId);
+        }
+
+        function handleDeleteProduct(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            deleteProduct(productId);
+        }
+
+        // Cargar muestras en el admin
+        async function loadSamplesTable() {
+            const samples = await fetchData('samples');
+            
+            if (!samples) {
+                document.getElementById('samplesTable').innerHTML = '<tr><td colspan="6">Error al cargar las muestras</td></tr>';
+                return;
+            }
+            
+            const samplesTable = document.getElementById('samplesTable');
+            samplesTable.innerHTML = '';
+            
+            samples.forEach(sample => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${sample.id}</td>
+                    <td>
+                        ${sample.image_url ? 
+                            `<img src="${sample.image_url}" alt="${sample.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">` : 
+                            '<span style="color: #999;">Sin imagen</span>'
+                        }
+                    </td>
+                    <td>${sample.title}</td>
+                    <td>${sample.product_name || 'N/A'}</td>
+                    <td>${sample.display_order}</td>
+                    <td>
+                        <button class="action-btn edit-btn" data-id="${sample.id}">Editar</button>
+                        <button class="action-btn delete-btn" data-id="${sample.id}">Eliminar</button>
+                    </td>
+                `;
+                samplesTable.appendChild(row);
+            });
+            
+            // CORRECCIÓN: Añadir event listeners a los botones después de cargar la tabla
+            attachSampleEventListeners();
+        }
+
+        // Función para adjuntar event listeners a los botones de muestras - REPARADO
+        function attachSampleEventListeners() {
+            // Event listeners para botones de muestras
+            document.querySelectorAll('#samplesTable .edit-btn').forEach(btn => {
+                btn.addEventListener('click', handleEditSample);
+            });
+            
+            document.querySelectorAll('#samplesTable .delete-btn').forEach(btn => {
+                btn.addEventListener('click', handleDeleteSample);
+            });
+        }
+
+        // Handlers específicos para muestras
+        function handleEditSample(e) {
+            const sampleId = parseInt(e.target.getAttribute('data-id'));
+            editSample(sampleId);
+        }
+
+        function handleDeleteSample(e) {
+            const sampleId = parseInt(e.target.getAttribute('data-id'));
+            deleteSample(sampleId);
+        }
+
+        // Cargar promociones en la tabla del admin
+        async function loadPromotionsTable() {
+            const promotions = await fetchData('promotions');
+            if (!promotions) {
+                promotionsTable.innerHTML = '<tr><td colspan="6">Error al cargar las promociones</td></tr>';
+                return;
+            }
+            
+            promotionsTable.innerHTML = '';
+            promotions.forEach(promotion => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${promotion.id}</td>
+                    <td>${promotion.name}</td>
+                    <td>${parseFloat(promotion.discount).toFixed(2)}%</td>
+                    <td>${promotion.code}</td>
+                    <td>${promotion.expiry_date}</td>
+                    <td>
+                        <button class="action-btn delete-btn" data-id="${promotion.id}">Eliminar</button>
+                    </td>
+                `;
+                promotionsTable.appendChild(row);
+            });
+            
+            // Añadir event listeners a los botones de eliminar
+            document.querySelectorAll('#promotionsTable .delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const promotionId = parseInt(e.target.getAttribute('data-id'));
+                    deletePromotion(promotionId);
+                });
+            });
+        }
+
+        // Cargar pedidos en la tabla del admin
+        async function loadOrdersTable() {
+            const orders = await fetchData('orders');
+            if (!orders) {
+                ordersTable.innerHTML = '<tr><td colspan="7">Error al cargar los pedidos</td></tr>';
+                return;
+            }
+            
+            ordersTable.innerHTML = '';
+            orders.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>
+                        <strong>${order.customer_name}</strong><br>
+                        <small>${order.customer_email}</small>
+                        ${order.customer_phone ? `<br><small>${order.customer_phone}</small>` : ''}
+                    </td>
+                    <td>${order.products}</td>
+                    <td>$${parseFloat(order.total_amount).toFixed(2)}</td>
+                    <td>
+                        <select class="status-select" data-order="${order.id}" onchange="updateOrderStatus(${order.id}, this.value)">
+                            <option value="pendiente" ${order.status === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                            <option value="procesando" ${order.status === 'procesando' ? 'selected' : ''}>Procesando</option>
+                            <option value="enviado" ${order.status === 'enviado' ? 'selected' : ''}>Enviado</option>
+                            <option value="completado" ${order.status === 'completado' ? 'selected' : ''}>Completado</option>
+                            <option value="cancelado" ${order.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+                        </select>
+                    </td>
+                    <td>
+                        <span class="payment-status payment-${order.payment_status}">
+                            ${order.payment_status}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="viewOrderDetails(${order.id})">Ver</button>
+                    </td>
+                `;
+                ordersTable.appendChild(row);
+            });
+        }
+
+        // Cargar contenido del sitio
+        async function loadSiteContent() {
+            const content = await fetchData('site_content');
+            if (!content) return;
+            
+            if (content.hero) {
+                document.getElementById('heroTitle').textContent = content.hero.title || 'Agendas Personalizadas de Alta Calidad';
+                document.getElementById('heroDescription').textContent = content.hero.content || 'Diseña tu agenda perfecta con nuestros materiales premium y personalización exclusiva.';
+                
+                // Cargar datos en el panel de administración
+                document.getElementById('adminHeroTitle').value = content.hero.title || '';
+                document.getElementById('adminHeroDescription').value = content.hero.content || '';
+            }
+            
+            if (content.cta) {
+                document.getElementById('ctaTitle').textContent = content.cta.title || '¿Listo para crear tu agenda perfecta?';
+                document.getElementById('ctaDescription').textContent = content.cta.content || 'Contáctanos hoy mismo y recibe asesoramiento personalizado.';
+                
+                // Cargar datos en el panel de administración
+                document.getElementById('ctaText').value = content.cta.title || '';
+                document.getElementById('ctaDescription').value = content.cta.content || '';
+            }
+        }
+
+        // Funciones para gestionar productos
+        const addProductBtn = document.getElementById('addProductBtn');
+        const productForm = document.getElementById('productForm');
+        const saveProduct = document.getElementById('saveProduct');
+        const cancelProduct = document.getElementById('cancelProduct');
+
+        addProductBtn.addEventListener('click', () => {
+            productForm.style.display = 'block';
+            editingProductId = null;
+            resetProductForm();
+        });
+
+        cancelProduct.addEventListener('click', () => {
+            productForm.style.display = 'none';
+            resetProductForm();
+            editingProductId = null;
+        });
+
+        saveProduct.addEventListener('click', async () => {
+            const name = document.getElementById('productName').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const description = document.getElementById('productDescription').value;
+            const stock = parseInt(document.getElementById('productStock').value) || 0;
+            const is_featured = document.getElementById('productFeatured').checked;
+            const imageFile = document.getElementById('productImage').files[0];
+
+            if (!name || !price || !description) {
+                alert('Por favor, complete todos los campos obligatorios');
+                return;
+            }
+
+            // Si hay archivo de imagen, usar FormData, sino JSON
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('price', price);
+                formData.append('description', description);
+                formData.append('stock', stock);
+                formData.append('is_featured', is_featured ? '1' : '0');
+                formData.append('image', imageFile);
+
+                let result;
+                if (editingProductId) {
+                    result = await putFormData(`products/${editingProductId}`, formData);
+                } else {
+                    result = await postFormData('products', formData);
+                }
+
+                if (result) {
+                    await loadProducts();
+                    await loadProductsTable();
+                    productForm.style.display = 'none';
+                    resetProductForm();
+                    editingProductId = null;
+                    alert(editingProductId ? 'Producto actualizado exitosamente' : 'Producto guardado exitosamente');
+                } else {
+                    alert('Error al guardar el producto');
+                }
+            } else {
+                // Sin imagen, usar JSON normal
+                const productData = {
+                    name: name,
+                    price: price,
+                    description: description,
+                    stock: stock,
+                    is_featured: is_featured
+                };
+
+                let result;
+                if (editingProductId) {
+                    result = await putData(`products/${editingProductId}`, productData);
+                } else {
+                    result = await postData('products', productData);
+                }
+
+                if (result) {
+                    await loadProducts();
+                    await loadProductsTable();
+                    productForm.style.display = 'none';
+                    resetProductForm();
+                    editingProductId = null;
+                    alert(editingProductId ? 'Producto actualizado exitosamente' : 'Producto guardado exitosamente');
+                } else {
+                    alert('Error al guardar el producto');
+                }
+            }
+        });
+
+        function resetProductForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productStock').value = '0';
+            document.getElementById('productFeatured').checked = false;
+            document.getElementById('productImage').value = '';
+            document.getElementById('productImageLabel').innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen';
+            document.getElementById('productImageLabel').classList.remove('has-file');
+            document.getElementById('productImagePreview').style.display = 'none';
+            document.getElementById('currentProductImage').style.display = 'none';
+        }
+
+        async function editProduct(id) {
+            const products = await fetchData('products');
+            const product = products.find(p => p.id === id);
+            if (product) {
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productDescription').value = product.description;
+                document.getElementById('productStock').value = product.stock || '';
+                document.getElementById('productFeatured').checked = product.is_featured || false;
+                
+                // Mostrar imagen actual si existe
+                if (product.image_url) {
+                    const currentImage = document.querySelector('#currentProductImage img');
+                    currentImage.src = product.image_url;
+                    document.getElementById('currentProductImage').style.display = 'flex';
+                } else {
+                    document.getElementById('currentProductImage').style.display = 'none';
+                }
+                
+                productForm.style.display = 'block';
+                editingProductId = id;
+                
+                // Scroll al formulario para mejor UX
+                productForm.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (confirm('¿Está seguro de que desea eliminar este producto?')) {
+                const result = await deleteData(`products/${id}`);
+                if (result) {
+                    await loadProducts();
+                    await loadProductsTable();
+                    alert('Producto eliminado exitosamente');
+                } else {
+                    alert('Error al eliminar el producto');
+                }
+            }
+        }
+
+        // Funciones para gestionar muestras
+        const addSampleBtn = document.getElementById('addSampleBtn');
+        const sampleForm = document.getElementById('sampleForm');
+        const saveSample = document.getElementById('saveSample');
+        const cancelSample = document.getElementById('cancelSample');
+        const sampleProduct = document.getElementById('sampleProduct');
+
+        addSampleBtn.addEventListener('click', async () => {
+            // Cargar productos en el select
+            const products = await fetchData('products');
+            sampleProduct.innerHTML = '<option value="">Seleccionar producto</option>';
+            products.forEach(product => {
+                sampleProduct.innerHTML += `<option value="${product.id}">${product.name}</option>`;
+            });
+            
+            sampleForm.style.display = 'block';
+            editingSampleId = null;
+            resetSampleForm();
+        });
+
+        cancelSample.addEventListener('click', () => {
+            sampleForm.style.display = 'none';
+            resetSampleForm();
+            editingSampleId = null;
+        });
+
+        saveSample.addEventListener('click', async () => {
+            const product_id = parseInt(sampleProduct.value);
+            const title = document.getElementById('sampleTitle').value;
+            const description = document.getElementById('sampleDescription').value;
+            const display_order = parseInt(document.getElementById('sampleOrder').value) || 0;
+            const imageFile = document.getElementById('sampleImage').files[0];
+
+            if (!product_id || !title) {
+                alert('Por favor, complete todos los campos obligatorios');
+                return;
+            }
+
+            // Si hay archivo de imagen, usar FormData, sino JSON
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append('product_id', product_id);
+                formData.append('title', title);
+                formData.append('description', description);
+                formData.append('display_order', display_order);
+                formData.append('image', imageFile);
+
+                let result;
+                if (editingSampleId) {
+                    result = await putFormData(`samples/${editingSampleId}`, formData);
+                } else {
+                    result = await postFormData('samples', formData);
+                }
+
+                if (result) {
+                    await loadSamplesTable();
+                    await loadSamples();
+                    sampleForm.style.display = 'none';
+                    resetSampleForm();
+                    editingSampleId = null;
+                    alert(editingSampleId ? 'Muestra actualizada exitosamente' : 'Muestra guardada exitosamente');
+                } else {
+                    alert('Error al guardar la muestra');
+                }
+            } else {
+                // Sin imagen, usar JSON normal
+                const sampleData = {
+                    product_id: product_id,
+                    title: title,
+                    description: description,
+                    display_order: display_order
+                };
+
+                let result;
+                if (editingSampleId) {
+                    result = await putData(`samples/${editingSampleId}`, sampleData);
+                } else {
+                    result = await postData('samples', sampleData);
+                }
+
+                if (result) {
+                    await loadSamplesTable();
+                    await loadSamples();
+                    sampleForm.style.display = 'none';
+                    resetSampleForm();
+                    editingSampleId = null;
+                    alert(editingSampleId ? 'Muestra actualizada exitosamente' : 'Muestra guardada exitosamente');
+                } else {
+                    alert('Error al guardar la muestra');
+                }
+            }
+        });
+
+        function resetSampleForm() {
+            document.getElementById('sampleTitle').value = '';
+            document.getElementById('sampleDescription').value = '';
+            document.getElementById('sampleOrder').value = '0';
+            document.getElementById('sampleImage').value = '';
+            document.getElementById('sampleImageLabel').innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen';
+            document.getElementById('sampleImageLabel').classList.remove('has-file');
+            document.getElementById('sampleImagePreview').style.display = 'none';
+            document.getElementById('currentSampleImage').style.display = 'none';
+        }
+
+        async function editSample(id) {
+            const samples = await fetchData('samples');
+            const sample = samples.find(s => s.id === id);
+            
+            if (sample) {
+                // Cargar productos en el select
+                const products = await fetchData('products');
+                sampleProduct.innerHTML = '<option value="">Seleccionar producto</option>';
+                products.forEach(product => {
+                    sampleProduct.innerHTML += `<option value="${product.id}" ${product.id === sample.product_id ? 'selected' : ''}>${product.name}</option>`;
+                });
+                
+                document.getElementById('sampleTitle').value = sample.title;
+                document.getElementById('sampleDescription').value = sample.description || '';
+                document.getElementById('sampleOrder').value = sample.display_order;
+                
+                // Mostrar imagen actual si existe
+                if (sample.image_url) {
+                    const currentImage = document.querySelector('#currentSampleImage img');
+                    currentImage.src = sample.image_url;
+                    document.getElementById('currentSampleImage').style.display = 'flex';
+                } else {
+                    document.getElementById('currentSampleImage').style.display = 'none';
+                }
+                
+                sampleForm.style.display = 'block';
+                editingSampleId = id;
+                
+                // Scroll al formulario para mejor UX
+                sampleForm.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        async function deleteSample(id) {
+            if (confirm('¿Está seguro de que desea eliminar esta muestra?')) {
+                const result = await deleteData(`samples/${id}`);
+                if (result) {
+                    await loadSamplesTable();
+                    await loadSamples();
+                    alert('Muestra eliminada exitosamente');
+                } else {
+                    alert('Error al eliminar la muestra');
+                }
+            }
+        }
+
+        // Funciones para gestionar promociones
+        const addPromotionBtn = document.getElementById('addPromotionBtn');
+        const promotionForm = document.getElementById('promotionForm');
+        const savePromotion = document.getElementById('savePromotion');
+        const cancelPromotion = document.getElementById('cancelPromotion');
+
+        addPromotionBtn.addEventListener('click', () => {
+            promotionForm.style.display = 'block';
+        });
+
+        cancelPromotion.addEventListener('click', () => {
+            promotionForm.style.display = 'none';
+            resetPromotionForm();
+        });
+
+        savePromotion.addEventListener('click', async () => {
+            const name = document.getElementById('promotionName').value;
+            const discount = parseFloat(document.getElementById('promotionDiscount').value);
+            const code = document.getElementById('promotionCode').value;
+            const expiry_date = document.getElementById('promotionExpiry').value;
+            
+            if (name && discount && code && expiry_date) {
+                const promotionData = { name, discount, code, expiry_date };
+                const result = await postData('promotions', promotionData);
+                
+                if (result) {
+                    await loadPromotionsTable();
+                    await showDiscountBanner();
+                    await loadProducts();
+                    promotionForm.style.display = 'none';
+                    resetPromotionForm();
+                    alert('Promoción guardada exitosamente');
+                } else {
+                    alert('Error al guardar la promoción');
+                }
+            } else {
+                alert('Por favor, complete todos los campos');
+            }
+        });
+
+        function resetPromotionForm() {
+            document.getElementById('promotionName').value = '';
+            document.getElementById('promotionDiscount').value = '';
+            document.getElementById('promotionCode').value = '';
+            document.getElementById('promotionExpiry').value = '';
+        }
+
+        async function deletePromotion(id) {
+            if (confirm('¿Está seguro de que desea eliminar esta promoción?')) {
+                const result = await deleteData(`promotions/${id}`);
+                if (result) {
+                    await loadPromotionsTable();
+                    await showDiscountBanner();
+                    await loadProducts();
+                    alert('Promoción eliminada exitosamente');
+                } else {
+                    alert('Error al eliminar la promoción');
+                }
+            }
+        }
+
+        // Funciones para gestionar contenido
+        const saveContent = document.getElementById('saveContent');
+
+        saveContent.addEventListener('click', async () => {
+            const heroTitle = document.getElementById('adminHeroTitle').value;
+            const heroDescription = document.getElementById('adminHeroDescription').value;
+            const ctaText = document.getElementById('ctaText').value;
+            const ctaDescription = document.getElementById('ctaDescription').value;
+            
+            const heroResult = await putData('site_content/hero', {
+                title: heroTitle,
+                content: heroDescription
+            });
+            
+            const ctaResult = await putData('site_content/cta', {
+                title: ctaText,
+                content: ctaDescription
+            });
+            
+            if (heroResult && ctaResult) {
+                await loadSiteContent();
+                alert('Contenido actualizado exitosamente');
+            } else {
+                alert('Error al actualizar el contenido');
+            }
+        });
+
+        // Función para actualizar estado del pedido
+        async function updateOrderStatus(orderId, newStatus) {
+            // Aquí iría la llamada a la API para actualizar el estado
+            alert(`Actualizando pedido ${orderId} a estado: ${newStatus} - Integrar con API`);
+        }
+
+        // Función para ver detalles del pedido
+        function viewOrderDetails(orderId) {
+            alert(`Mostrando detalles del pedido ${orderId} - Integrar con API`);
+        }
+
+        // Mostrar/ocultar panel de administración
+        adminToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            adminPanel.style.display = 'block';
+            window.scrollTo({ top: adminPanel.offsetTop, behavior: 'smooth' });
+            // Cargar datos del admin si es necesario
+            loadProductsTable();
+            loadSamplesTable();
+            loadPromotionsTable();
+            loadOrdersTable();
+        });
+
+        closeAdmin.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+        });
+
+        // Funcionalidad de pestañas del admin
+        adminTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remover clase active de todas las pestañas
+                adminTabs.forEach(t => t.classList.remove('active'));
+                // Añadir clase active a la pestaña clickeada
+                tab.classList.add('active');
+                
+                // Ocultar todos los contenidos
+                adminContents.forEach(content => content.classList.remove('active'));
+                // Mostrar el contenido correspondiente
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+
+        // Event listeners para el modal
+        closeModal.addEventListener('click', closePurchaseModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === purchaseModal) {
+                closePurchaseModal();
+            }
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Inicializar subida de archivos
+            setupFileUpload('productImage', 'productImageLabel', 'productImagePreview', 'currentProductImage');
+            setupFileUpload('sampleImage', 'sampleImageLabel', 'sampleImagePreview', 'currentSampleImage');
+            
+            // Cargar datos
+            await loadSiteContent();
+            await showDiscountBanner();
+            await loadSamples();
+            await loadProducts();
+            await loadProductsTable();
+            await loadPromotionsTable();
+            await loadOrdersTable();
+        });
+    </script>
+</body>
+</html>
